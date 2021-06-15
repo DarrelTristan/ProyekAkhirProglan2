@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#define WIDTH 30
+#define WIDTH 40
 #define HEIGHT 25
 
 int menu();	//main menu interface
