@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+//hello world by win
 
 #define WIDTH 30
 #define HEIGHT 30
