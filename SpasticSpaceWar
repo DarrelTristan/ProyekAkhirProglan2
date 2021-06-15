@@ -7,6 +7,12 @@
 #define WIDTH 40
 #define HEIGHT 25
 
+struct data{
+	int score;
+	float time;
+	char name[50]
+};
+
 int menu();	//main menu interface
 void print_title();
 void clear_arena(char arena[WIDTH][HEIGHT]);
