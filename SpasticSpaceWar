@@ -3,43 +3,41 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-//hello world by win
 
 #define WIDTH 30
-#define HEIGHT 30
+#define HEIGHT 25
 
 int menu();	//main menu interface
 void print_title();
-void clear_arena(char arena[WIDTH][HEIGHT]){
-	int i, j;
-	for (i = 0; i < HEIGHT; i++){
-		for (j = 0; j < WIDTH; j++){
-			arena[i][j] = '0';
-		}
-	}
-}
-void print_arena(char arena[WIDTH][HEIGHT]){
-	int i, j;
-	for (i = 0; i < HEIGHT; i++){
-		for (j = 0; j < WIDTH; j++){
-			printf("%c", arena[i][j]);
-		}
-		printf("\n");
-	}
-}
+void clear_arena(char arena[WIDTH][HEIGHT]);
+void print_arena(char arena[WIDTH][HEIGHT]);
+void print_2arena(char arena[WIDTH][HEIGHT]);
 
 int main(){
 	int max_used_threads = 3;
-	int option, player = 1;
+	int option, player, dead = 0;
 	int i,j,k;
 	option = menu();
-	char arena[player][WIDTH][HEIGHT];
-	clear_arena(arena[0]);
-	print_arena(arena[0]);
+	
 	
 	switch (option){
 		case 1 : 
 			{	//Singleplayer
+				player = 1;
+				char arena[player][WIDTH][HEIGHT];
+				clear_arena(arena[0]);
+				print_arena(arena[0]);
+				do{
+					
+					
+					
+					
+					
+				} while(dead != 1);
+				print_arena(arena[0]);
+				
+				
+				
 				
 				break;
 			}
@@ -125,6 +123,39 @@ int menu(){
 		system("cls");
 	} while (code != '\r');
 	return input+1;
+}
+
+void clear_arena(char arena[WIDTH][HEIGHT]){
+	int i, j;
+	for (i = 0; i < HEIGHT; i++){
+		for (j = 0; j < WIDTH; j++){
+			arena[i][j] = '.';
+		}
+	}
+}
+
+void print_2arena(char arena[WIDTH][HEIGHT]){
+	int i, j;
+	for (i = 0; i < HEIGHT; i++){
+		for (j = 0; j < WIDTH; j++){
+			printf("%c", arena[i][j]);
+		}
+		printf("\t|\t");
+		for (j = 0; j < WIDTH; j++){
+			printf("%c", arena[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+void print_arena(char arena[WIDTH][HEIGHT]){
+	int i, j;
+	for (i = 0; i < HEIGHT; i++){
+		for (j = 0; j < WIDTH; j++){
+			printf("%c", arena[i][j]);
+		}
+		printf("\n");
+	}
 }
 
 void print_title(){
