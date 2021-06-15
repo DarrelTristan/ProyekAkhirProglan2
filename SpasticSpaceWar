@@ -1,0 +1,129 @@
+#include <stdio.h>
+#include <omp.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+#define WIDTH 30
+#define HEIGHT 30
+
+int menu();	//main menu interface
+void clear_arena(char arena[WIDTH][HEIGHT]){
+	int i, j;
+	for (i = 0; i < HEIGHT; i++){
+		for (j = 0; j < WIDTH; j++){
+			arena[i][j] = '0';
+		}
+	}
+}
+void print_arena(char arena[WIDTH][HEIGHT]){
+	int i, j;
+	for (i = 0; i < HEIGHT; i++){
+		for (j = 0; j < WIDTH; j++){
+			printf("%c", arena[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+int main(){
+	int max_used_threads = 3;
+	int option, player = 1;
+	int i,j,k;
+	option = menu();
+	char arena[player][WIDTH][HEIGHT];
+	clear_arena(arena[0]);
+	print_arena(arena[0]);
+	
+	switch (option){
+		case 1 : 
+			{	//Singleplayer
+				
+				break;
+			}
+		case 2 : 
+			{	//Local Multiplayer
+				
+				break;
+			}
+		case 3 : 
+			{	//Leaderboard and save in a file (make a new file if no save file)
+				
+				break;
+			}
+		case 4 : 
+			{	//How to Play
+				
+				break;
+			}
+		case 5 : 
+			{	//Exit Game
+				printf("Thanks for playing...");
+				return 0;
+				break;
+			}
+	}
+	
+	
+
+
+	#pragma omp parallel num_threads(max_used_threads)
+	{
+		int numt = omp_get_thread_num();
+		int threads = omp_get_num_threads();
+		printf("Hello from thread %d of %d\n", numt, threads);
+	}
+	return 0;
+	
+	
+	
+	
+	
+	
+	
+}
+
+int menu(){
+	char code;
+	int input = 0, maks = 5;
+	do{
+		printf("===========================\n");
+		printf("=                         =\n");
+		printf("=  WELCOME TO GALAXY WAR  =\n");
+		printf("=                         =\n");
+		printf("===========================\n\n");
+		int i;
+		char select[maks][3];
+		for(i = 0; i < maks; i++){
+			strcpy(select[i],"");
+		}
+		char option[maks][20];
+		strcpy(option[0],"Singleplayer");
+		strcpy(option[1],"Local-Multiplayer");
+		strcpy(option[2],"Leaderboard");
+		strcpy(option[3],"How To Play?");
+		strcpy(option[4],"Exit Game");
+		
+		strcpy(select[input],"-->");
+		for(i = 0; i < maks; i++){
+			printf("%3s |%s\n", select[i], option[i]);
+		}
+		code = tolower(getch());
+		switch (code){
+			case 'w' : 
+					input--;
+					if(input == -1){
+						input = maks-1;
+					}
+					break;
+			case 's' : 
+					input++;
+					if(input == maks){
+						input = 0;
+					}
+					break;
+		}
+		system("cls");
+	} while (code != '\r');
+	return input+1;
+}
