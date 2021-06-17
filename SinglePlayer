@@ -64,15 +64,15 @@ void input()
 		case 'a':
 			flag = 1;
 			break;
-	/*	case 's': 
+		case 's': 
 			flag = 2;
-			break; */
+			break; 
 		case 'd':
 			flag = 3;
 			break;
-	/*	case 'w':
+		case 'w':
 			flag = 4;
-			break; */
+			break; 
 		case 'x':
 			gameover = 1;
 			break;
