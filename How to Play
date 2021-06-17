@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <string.h>
+
+int main (){
+	int i, maks = 2, input = 0;
+	char code;	
+	do {
+		printf("======================\n");
+		printf("= SPASTIC SPACE WARS =\n");
+		printf("======================\n");	
+		printf("%s%s","Merupakan video game 2d yang bertemakan luar angkasa. Player dapat mengerakkan spaceship\n",
+		"secara horizontal untuk menghancurkan asteroid yang sedang bergerak menuju spaceship.\n");
+		printf ("\n------------ HOW TO PLAY --------------\n>>Berikut adalah langkah-langkah untuk bermain mode Single Player :\n");
+		printf ("1. Pilih 'Single Player' yang tersedia di menu\n");
+		printf ("2. Setelah itu anda sudah dapat memulai permainan");
+		printf ("\n\n>>Berikut adalah langkah-langkah untuk bermain mode Local Multiplayer :\n");
+		printf ("1. Pilih 'Local MultiPlayer' yang tersedia di menu\n");
+		printf ("2. Setelah itu anda sudah dapat memulai permainan dalam mode 2 pemain");
+	
+		printf ("\n\n------------ RULES OF PLAY ------------\nBerikut adalah aturan permainan :\n");
+		printf ("1. Player dapat mengerakkan spaceship dengan menekan tombol 'A' untuk ke arah kiri dan \n");
+		printf ("   tombol 'D' untuk ke arah kanan.\n");
+		printf ("2. Spaceship akan menembak secara otomatis\n");
+		printf ("3. Arahkan spaceship ke asteroid yang mendekat agar dapat dihancurkan\n");
+		printf ("4. Setiap asteroid yang dihancurkan akan mendapatkan poin 10\n");
+		printf ("5. Pemain dapat mengumpulkan poin sebanyak-banyaknya\n");
+		printf ("6. Permainan akan berakhir ketika asteroid melewati batas yang telah ditentukan\n");
+	
+		printf ("\nApakah sudah siap untuk bermain ?\n");
+		char select[maks][3];
+		for(i = 0; i < maks; i++){
+			strcpy(select[i], "");
+		}
+		char opsi[maks][10];
+		strcpy(opsi[0], "YES");
+		strcpy(opsi[1], "NO");
+	
+		strcpy(select[input], "-->");
+		for(i = 0; i < maks; i++){
+			printf("%3s |%s\n", select[i], opsi[i]);
+		}
+		code = tolower(getch());
+		switch (code){
+			case 'w' :
+				input--;
+				if(input == -1){
+					input = maks - 1;
+				}
+				break;
+			case 's' :
+				input++;
+				if(input == maks){
+					input = 0;
+				}
+				break;
+		}
+		system("cls");
+	} while (code != '\r' || input == 1);
+}
