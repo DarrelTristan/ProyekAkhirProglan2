@@ -39,10 +39,10 @@ void draw()
 			}
 			else {
 				if (i == x && j == y)
-					printf("0");
+					printf("H");
 				else if (i == fruitx
 						&& j == fruity)
-					printf("*");
+					printf("0");
 				else
 					printf(" ");
 			}
