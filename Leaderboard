@@ -1,0 +1,143 @@
+#include <stdio.h>  
+#include <stdlib.h>
+#include <string.h>
+
+struct node{  
+    int data;  
+    char *s;
+    float time;
+    struct node *next;  
+};      
+   
+struct node *head, *tail = NULL;  
+ 
+void addNode(char *s, int data, float time) {  
+    //Create a new node  
+    struct node *newNode = (struct node*)malloc(sizeof(struct node));  
+    newNode->data = data;  
+    newNode->s = s;
+    newNode->time = time;
+    newNode->next = NULL;  
+      
+    //Checks if the list is empty  
+    if(head == NULL) {  
+        head = newNode;  
+        tail = newNode;  
+    }  
+    else {  
+        tail->next = newNode;  
+        tail = newNode;  
+    }  
+}  
+   
+void sortList() {  
+    //Node current will point to head  
+    struct node *current = head, *index = NULL;  
+    int temp;
+	float temp1;
+    char temp2[100];
+          
+    if(head == NULL) {  
+        return;  
+    }  
+    else {  
+        while(current != NULL) {  
+                  
+            index = current->next;  
+                
+            while(index != NULL) {  
+                    
+                if(current->data < index->data) {  
+                    temp = current->data;  
+                    current->data = index->data;  
+                    index->data = temp;  
+                    
+                    temp1 = current->time;  
+                    current->time = index->time;  
+                    index->time = temp1; 
+                        
+                    strcpy(temp2,current->s);
+            		strcpy(current->s,index->s);
+            		strcpy(index->s,temp2);
+                }
+				else if(current->data == index->data && strcmpi(current->s,index->s) > 0) {  
+                    temp = current->data;  
+                    current->data = index->data;  
+                    index->data = temp;
+					
+					temp1 = current->time;
+					current->time = index->time;
+					index->time = temp1;  
+                
+                    strcpy(temp2,current->s);
+            		strcpy(current->s,index->s);
+            		strcpy(index->s,temp2);
+                }  
+                index = index->next;  
+            }  
+            current = current->next;  
+        }      
+    }  
+}  
+
+void write (FILE *fptr){
+	fptr = fopen ("ScoreText.txt", "w");    
+    struct node *current = head;  
+    if(head == NULL) {  
+        printf("Tidak ada list \n");  
+        return;  
+    }
+    while(current != NULL) { 
+		fprintf(fptr, "%s\t %d\t %.2f\n", current->s, current->data, current->time);
+        current = current->next;  
+    } 
+	fclose(fptr);   
+} 
+
+void display (FILE *fptr, int *score, float *waktu, int total){
+	int  j;
+	char nama[100][25];
+	fptr = fopen ("ScoreText.txt", "r"); 
+	for (j = 0; j < total; j++){
+		fscanf(fptr, "%s %d %f\n", &nama[j], &score[j], &waktu[j]);	
+	}
+	fclose(fptr);
+	printf ("%s\t%s\t%s\n", "NAME", "SCORE", "TIME");
+	printf ("======================\n");
+	for (j = 0; j < total; j++){
+		printf("%s\t", nama[j]);
+    	printf("%d\t", score[j]);
+		printf("%.2f\n", waktu[j]);	
+	}  
+} 
+      
+int main (){
+	FILE *fptr;  
+	int pemain, *score, i, temp1;
+	float *waktu;
+	char nama[100][25], temp2[100];
+
+  printf ("Masukkan jumlah pemain : ");
+	scanf ("%d", &pemain);
+	score = (int*)malloc(pemain*sizeof(int)); 	
+	waktu = (float*)malloc(pemain*sizeof(float));
+	
+	for (i = 0; i < pemain; i++){
+		printf ("\nMasukkan nama pemain %d : ", i + 1);
+		scanf("%s", &nama[i]);
+		printf ("Masukkan score pemain %d : ", i + 1);
+		scanf("%d", &score[i]);
+		printf ("Masukkan waktu pemain %d : ", i + 1);
+		scanf("%f", &waktu[i]);
+	}
+	
+	for (i = 0; i < pemain; i++){
+		addNode(nama[i], score[i], waktu[i]);   //linked list
+	}
+      
+    sortList();    				             //Sorting list (descending)
+	  write(fptr);    			             //Write leaderboard to the text
+    printf("\n>>Leaderboard:\n");  
+    display(fptr, score, waktu, pemain); 	 //Displaying leaderboard from the text 
+    return 0;  
+}  
