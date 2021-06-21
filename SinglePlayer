@@ -22,6 +22,7 @@ int main()
 
     srand(time(NULL)); //number randomizer
 
+
     printf("\n \n \n \n Press any key to start.");
     getch();
 
@@ -68,9 +69,6 @@ int main()
             }
 
         /*waktu laser*/
-        /* fungsi untuk laser agar dapat bergerak keatas*/
-        /* serta fungsi logic pada saat terjadi hit*/
-        
         for (x = 0; x < sizex; x ++) {
             for (y = sizey-1; y >= 0; y --) {
                 if (i%2 == 0 && world[y][x] == enemyLaser
@@ -135,7 +133,7 @@ int main()
             }
         }
 
-        /*refresh arah gerak musuh*/
+         /*refresh arah gerak musuh*/
         /* fungsi dibawah adalah untuk refresh/gerak kesamping pada sumbu x*/
         for (y = 0; y < sizey; y ++) {
             if (world[y][0] == enemy) {
